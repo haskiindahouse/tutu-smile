@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Улыбка — документация</title>
+<meta name="theme-color" content="#F9363C">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="fonts/fonts-cheer.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --red: #F9363C;
+    --amber: #F5A83B;
+    --panel: #F5F5F5;
+    --line-soft: rgba(34,30,26,.09);
+    --ink: #221E1A;
+    --ink-dim: #6B6257;
+    --tablo-bg: #23282C;
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    --sans: 'Onest', 'Segoe UI', system-ui, sans-serif;
+    --disp: 'Unbounded', 'Onest', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 400 16px/1.65 var(--sans); color: var(--ink); background: #fff;
+    -webkit-font-smoothing: antialiased; }
+
+  /* красное поле с пулом света — как хиро лендинга */
+  .hero {
+    position: relative;
+    background: var(--red);
+    color: #fff;
+    padding: 0 48px 56px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(60% 44% at 68% 108%, rgba(245,168,59,.30), transparent 66%),
+      linear-gradient(173deg, rgba(255,222,160,.16) 0%, rgba(255,222,160,.05) 24%, transparent 48%),
+      linear-gradient(180deg, rgba(150,25,8,.10), transparent 34%);
+  }
+  .hero > * { position: relative; z-index: 1; }
+
+  /* топбар, как на лендинге */
+  .topbar { display: flex; align-items: center; justify-content: space-between;
+    max-width: 1160px; margin: 0 auto; padding: 20px 0; }
+  .logo { font-weight: 700; font-size: 19px; letter-spacing: -.02em;
+    color: #fff; text-decoration: none; }
+  .logo b { color: var(--amber); font-weight: 700; }
+  .nav-cta { display: inline-flex; align-items: center; gap: 8px; height: 40px;
+    padding: 0 20px; background: #000; color: #fff; font-weight: 500; font-size: 14px;
+    text-decoration: none; border-radius: 999px; transition: background .2s, transform .2s; }
+  .nav-cta:hover { background: #2a2a2a; transform: translateY(-1px); }
+  .nav-cta svg { width: 15px; height: 15px; fill: currentColor; }
+
+  .hero-copy { max-width: 1160px; margin: 0 auto; padding-top: 40px; }
+  .hero-copy h1 { font-family: var(--disp); font-weight: 700; font-size: 44px;
+    line-height: 1.08; letter-spacing: -.01em; margin: 0 0 14px; }
+  .hero-copy p { margin: 0; font-size: 16px; opacity: .82; max-width: 560px; }
+  .hero-copy .mono { font-family: var(--mono); font-size: 13px; opacity: .6;
+    margin-top: 18px; display: block; }
+
+  .wrap { display: flex; max-width: 1160px; margin: 0 auto; }
+  nav { width: 250px; flex-shrink: 0; padding: 32px 24px 32px 0; }
+  nav a { display: block; padding: 7px 14px; margin: 2px 0; color: var(--ink-dim);
+    text-decoration: none; border-radius: 999px; font-weight: 500; font-size: 15px;
+    transition: background .15s, color .15s; }
+  nav a:hover { background: var(--panel); color: var(--ink); }
+  nav a.active { background: #000; color: #fff; }
+
+  main { padding: 32px 0 80px 24px; max-width: 780px; }
+  main h1 { font-size: 28px; font-weight: 700; letter-spacing: -.01em; margin: 0 0 16px; }
+  main h2 { margin-top: 40px; font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+  main a { color: var(--red); }
+
+  code { font-family: var(--mono); font-size: 13.5px;
+    background: var(--panel); padding: 2px 7px; border-radius: 6px; }
+  pre { background: var(--tablo-bg); color: var(--amber); padding: 18px 20px;
+    border-radius: 16px; overflow-x: auto; font-size: 13.5px; }
+  pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 16px 0; }
+  th, td { border-bottom: 1px solid var(--line-soft); padding: 8px 12px;
+    text-align: left; vertical-align: top; }
+  th { font-weight: 600; background: var(--panel); }
+  tr:first-child th:first-child { border-radius: 12px 0 0 0; }
+  tr:first-child th:last-child { border-radius: 0 12px 0 0; }
+
+  .mermaid { display: flex; justify-content: center; background: var(--panel);
+    border-radius: 16px; padding: 20px; margin: 16px 0; }
+
+  @media (max-width: 800px) {
+    .hero { padding: 0 20px 40px; }
+    .hero-copy h1 { font-size: 30px; }
+    .wrap { flex-direction: column; }
+    nav { width: auto; padding: 16px 20px; border-bottom: 1px solid var(--line-soft); }
+    main { padding: 24px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="topbar">
+    <a class="logo" href="#index">Улыбка<b>·доки</b></a>
+    <a class="nav-cta" href="https://github.com/haskiindahouse/tutu-smile" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      Исходники
+    </a>
+  </div>
+  <div class="hero-copy">
+    <h1>Документация</h1>
+    <p>Как устроен код сервиса: пакеты, конвейер сборки табло, MCP-клиент, HTTP API и фронтенд.</p>
+    <span class="mono">go 1.26 · stdlib only · один бинарник</span>
+  </div>
+</div>
+<div class="wrap">
+  <nav id="menu"></nav>
+  <main id="page">Загрузка…</main>
+</div>
+<script>
+// Список страниц живёт здесь: добавил файл в docs/ — добавь строку сюда.
+const PAGES = [
+  ["index", "Обзор"],
+  ["architecture", "Архитектура и пакеты"],
+  ["pipeline", "Конвейер: планировщик, волна, оркестратор"],
+  ["mcp", "MCP-клиент и слой tutu"],
+  ["api", "HTTP API"],
+  ["frontend", "Фронтенд"],
+];
+
+const menu = document.getElementById("menu");
+const page = document.getElementById("page");
+
+mermaid.initialize({ startOnLoad: false, theme: "base",
+  themeVariables: { primaryColor: "#F5F5F5", primaryBorderColor: "#F9363C",
+    primaryTextColor: "#221E1A", lineColor: "#6B6257", fontFamily: "Onest" } });
+
+async function load(name) {
+  menu.innerHTML = PAGES.map(([id, t]) =>
+    `<a href="#${id}" class="${id === name ? "active" : ""}">${t}</a>`).join("");
+  const res = await fetch(`/docs/${name}.md`);
+  page.innerHTML = res.ok ? marked.parse(await res.text()) : "<h1>404</h1>";
+  // ```mermaid-блоки → SVG
+  const blocks = page.querySelectorAll("pre code.language-mermaid");
+  for (const code of blocks) {
+    const pre = code.closest("pre");
+    const div = document.createElement("div");
+    div.className = "mermaid";
+    div.textContent = code.textContent;
+    pre.replaceWith(div);
+  }
+  await mermaid.run({ nodes: page.querySelectorAll(".mermaid") });
+  window.scrollTo(0, 0);
+}
+
+function route() { load(location.hash.slice(1) || "index"); }
+addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>

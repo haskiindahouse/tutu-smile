@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Улыбка</title>
+  <meta name="description" content="Собирает гостей события из разных городов к одному дедлайну: маршрут каждому, живое табло прибытий, ссылки «дожать» на Туту.">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23F9363C'/><text x='32' y='42' font-family='monospace' font-size='28' font-weight='700' fill='white' text-anchor='middle'>:)</text></svg>">
+</head>
+<body>
+  <div class="topbar">
+    <a class="brand" href="#/" onclick="event.preventDefault();Router.go('/')">
+      <span>Улыбка <b class="sm">:)</b></span>
+    </a>
+    <div class="spacer"></div>
+  </div>
+  <div id="app" class="wrap"></div>
+
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="/app.js"></script>
+  <script src="/board.js"></script>
+</body>
+</html>

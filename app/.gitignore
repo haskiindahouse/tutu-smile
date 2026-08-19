@@ -1,0 +1,25 @@
+# build artefacts
+/smile
+/smile-bin
+bin/
+*.exe
+*.test
+*.out
+
+# secrets & local env
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# scratch / temp
+tmp/
+scratch/
